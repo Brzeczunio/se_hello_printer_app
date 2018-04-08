@@ -36,6 +36,19 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
     PYTHONPATH=. py.test
     PYTHONPATH=. py.test  --verbose -s
 
+- Uruchamianie testów z coverage:
+
+  ::
+
+    PYTHONPATH=. py.test --verbose -s --cov=.
+
+- Smoke test:
+
+  ::
+
+    curl --fail 127.0.0.1:5000
+    curl -s -o /dev/null -w "%{http_code}" --fail 127.0.0.1:5000  
+
 - Kontynuując pracę z projektem, aktywowanie hermetycznego środowiska dla aplikacji py:
 
   ::
