@@ -266,10 +266,8 @@ Badge StatusCake i Travis w READE.request
 
 - Dodaj Badge z TravisCI i StatusCake:
 
-  ::
-
   '.. image:: https://app.statuscake.com/button/index.php?Track=WSVD7LRwz0&Days=1000&Design=1'
-      ':target: https://app.statuscake.com/''
+      ':target: https://app.statuscake.com/
 
   '.. image:: https://travis-ci.org/Brzeczunio/se_hello_printer_app.svg?branch=master'
       ':target: https://travis-ci.org/Brzeczunio/se_hello_printer_app'
