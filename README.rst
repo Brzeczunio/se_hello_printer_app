@@ -317,3 +317,14 @@ Test coverage
   ::
 
     PYTHONPATH=. py.test -s --cov=. --junit-xml=test_results.xml
+
+- Dodaj dwa nowe targety do pliku Makefile:
+
+  ::
+
+    - test_cov - generacja coverage
+    - test_xunit - generacja xunit i coverage
+
+- Dodaj plik .gitignore, tak aby git (git status) ignorował pliki: test_results.xml i coverage.
+
+- Wykorzystaj make test_xunit w .travis.yml
