@@ -328,3 +328,12 @@ Test coverage
 - Dodaj plik .gitignore, tak aby git (git status) ignorował pliki: test_results.xml i coverage.
 
 - Wykorzystaj make test_xunit w .travis.yml
+
+- Bonus 1: wykorzystaj https://www.codeclimate.com/ do śledzenia metryk Twojego kodu
+
+- Bonus 2: Code complexity z radon (patrz: https://pypi.python.org/pypi/radon):
+
+  ::
+
+    pip install radon
+    radon cc hello_world
