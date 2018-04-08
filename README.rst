@@ -48,7 +48,29 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
   ::
 
-    ...
+    docker_build:
+    docker build -t $(MY_DOCKER_NAME) .
+
+    docker_run: docker_build
+        docker run \
+          --name $(SERVICE_NAME)-dev \
+           -p 5000:5000 \
+           -d $(MY_DOCKER_NAME)
+
+    docker_stop:
+    docker stop $(SERVICE_NAME)-dev
+
+    USERNAME=brzeczunio
+    TAG=$(USERNAME)/$(MY_DOCKER_NAME)
+
+    docker_push: docker_build
+    @docker login --username $(USERNAME) --password $${DOCKER_PASSWORD}; \
+    docker tag $(MY_DOCKER_NAME) $(TAG); \
+    docker tag $(MY_DOCKER_NAME) $(TAG):$$(cat VERSION); \
+    docker push $(TAG); \
+    docker logout;
+
+  W TravisCI dodajemy zmienną o nazwie: DOCKER_PASSWORD, gdzie podajemy nasze hasło do dockera
 
 
 - Odpalanie komend z pliku Makefile:
@@ -261,13 +283,37 @@ Prosty monitoring z Statuscake
       - Nazwa: dowolna
       - Contact Group
 
+
 Badge StatusCake i Travis w READE.request
 ========
 
 - Dodaj Badge z TravisCI i StatusCake:
 
-  '.. image:: https://app.statuscake.com/button/index.php?Track=WSVD7LRwz0&Days=1000&Design=1'
+  '.. image:: https://app.statuscake.com/button/index.php?Track=WSVD7LRwz0&Days=1&Design=6'
       ':target: https://app.statuscake.com/
 
   '.. image:: https://travis-ci.org/Brzeczunio/se_hello_printer_app.svg?branch=master'
       ':target: https://travis-ci.org/Brzeczunio/se_hello_printer_app'
+
+
+Test coverage
+========
+
+- Dodaj pytest-cov do test_requirements.txt:
+
+  ::
+
+    echo 'pytest-cov' >> test_requirements.txt
+    pip install -r test_requirements.txt
+
+- Teraz możemy wywołać py.test z aktywowanym pytest-cov:
+
+  ::
+
+    PYTHONPATH=. py.test --verbose -s --cov=.
+
+- Generacja plików xunit:
+
+  ::
+
+    PYTHONPATH=. py.test -s --cov=. --junit-xml=test_results.xml
